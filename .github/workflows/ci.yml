@@ -1,0 +1,64 @@
+# =============================================================================
+# OpenFinova Minab Banking Customer App — CI Build & Test
+# =============================================================================
+# Runs on every push to main / dev and on all pull requests.
+# Steps: checkout → setup Node → install → lint → typecheck → test → build
+# =============================================================================
+
+name: CI Build & Test
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+          OIDC_AUTHORITY: ${{ vars.OIDC_AUTHORITY }}
+          OIDC_CLIENT_ID: ${{ vars.OIDC_CLIENT_ID }}
+          OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CLIENT_SECRET }}
+          OIDC_REDIRECT_URI: ${{ vars.OIDC_REDIRECT_URI }}
+          OIDC_POST_LOGOUT_REDIRECT_URI: ${{ vars.OIDC_POST_LOGOUT_REDIRECT_URI }}
+          OIDC_SCOPES: ${{ vars.OIDC_SCOPES }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          SESSION_IDLE_MS: ${{ vars.SESSION_IDLE_MS }}
+          NEXT_PUBLIC_IDLE_TIMEOUT_MS: ${{ vars.NEXT_PUBLIC_IDLE_TIMEOUT_MS }}
+          NEXT_PUBLIC_IDLE_WARNING_MS: ${{ vars.NEXT_PUBLIC_IDLE_WARNING_MS }}
