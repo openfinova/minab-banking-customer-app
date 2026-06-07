@@ -51,14 +51,19 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          APP_PUBLIC_URL: ${{ vars.APP_PUBLIC_URL }}
           API_BASE_URL: ${{ vars.API_BASE_URL }}
           OIDC_AUTHORITY: ${{ vars.OIDC_AUTHORITY }}
+          OIDC_TOKEN_AUTHORITY: ${{ vars.OIDC_TOKEN_AUTHORITY }}
           OIDC_CLIENT_ID: ${{ vars.OIDC_CLIENT_ID }}
           OIDC_CLIENT_SECRET: ${{ secrets.OIDC_CLIENT_SECRET }}
           OIDC_REDIRECT_URI: ${{ vars.OIDC_REDIRECT_URI }}
           OIDC_POST_LOGOUT_REDIRECT_URI: ${{ vars.OIDC_POST_LOGOUT_REDIRECT_URI }}
           OIDC_SCOPES: ${{ vars.OIDC_SCOPES }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          SESSION_COOKIE_SECURE: ${{ vars.SESSION_COOKIE_SECURE }}
           SESSION_IDLE_MS: ${{ vars.SESSION_IDLE_MS }}
+          SESSION_ABSOLUTE_MS: ${{ vars.SESSION_ABSOLUTE_MS }}
+          SESSION_ALLOW_REFRESH: ${{ vars.SESSION_ALLOW_REFRESH }}
           NEXT_PUBLIC_IDLE_TIMEOUT_MS: ${{ vars.NEXT_PUBLIC_IDLE_TIMEOUT_MS }}
           NEXT_PUBLIC_IDLE_WARNING_MS: ${{ vars.NEXT_PUBLIC_IDLE_WARNING_MS }}
