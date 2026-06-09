@@ -41,6 +41,7 @@ export const Permissions = {
   ReconciliationRead: "reconciliation:read",
   ReconciliationWrite: "reconciliation:write",
   AccountRead: "account:read",
+  AccountReadOwn: "account:read:own",
   AccountWrite: "account:write",
   TransactionRead: "transaction:read",
   TransactionWrite: "transaction:write",

@@ -12,7 +12,7 @@ const LABELS: Record<string, string> = {
   lookup: "Lookup",
   directory: "Directory",
   new: "New",
-  transactions: "Payments",
+  transactions: "Transactions",
   kyc: "KYC",
   contacts: "Contacts",
   documents: "Documents",

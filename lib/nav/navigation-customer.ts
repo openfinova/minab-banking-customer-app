@@ -34,22 +34,30 @@ export const navSections: NavSection[] = [
     items: [{ label: "Overview", href: "/dashboard", icon: LayoutDashboard }],
   },
   {
-    id: "banking",
-    label: "Banking",
+    id: "accounts",
+    label: "Accounts",
     icon: Wallet,
-    permissions: [Permissions.AccountRead, Permissions.TransactionRead],
+    permissions: [Permissions.AccountReadOwn],
     items: [
       {
-        label: "Accounts",
+        label: "All Accounts",
         href: "/accounts",
         icon: Wallet,
-        permissions: [Permissions.AccountRead],
+        permissions: [Permissions.AccountReadOwn],
       },
+    ],
+  },
+  {
+    id: "transactions",
+    label: "Transactions",
+    icon: CreditCard,
+    permissions: [Permissions.AccountReadOwn],
+    items: [
       {
-        label: "Transactions",
+        label: "All transactions",
         href: "/transactions",
         icon: CreditCard,
-        permissions: [Permissions.TransactionRead],
+        permissions: [Permissions.AccountReadOwn],
       },
     ],
   },
