@@ -1,14 +1,9 @@
 import { api } from "@/lib/api/client";
+import type { AccountResponse } from "@/lib/api/modules/accounts";
 
-export interface CustomerAccountSummary {
-  id: string;
-  accountNumber: string;
-  displayName: string;
-  currency: string;
-  availableBalance: number;
-  status: string;
-}
+export type { AccountResponse, AccountProductType, AccountStatus } from "@/lib/api/modules/accounts";
 
 export const customerAccountsApi = {
-  listOwnAccounts: () => api.get<CustomerAccountSummary[]>("/api/v1/customer/accounts"),
+  /** Lists accounts for the authenticated customer (JWT subject). */
+  listOwnAccounts: () => api.get<AccountResponse[]>("/api/v1/accounts/me"),
 };

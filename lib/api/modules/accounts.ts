@@ -223,7 +223,10 @@ export interface AddLimitBody {
 export interface AccountTransactionResponse {
   id: string;
   accountId: string;
+  accountNumber?: string;
   transactionType: AccountTransactionType;
+  direction?: "CREDIT" | "DEBIT";
+  status?: string;
   amount: string | number;
   currency: string;
   transactionDate: string;
