@@ -15,11 +15,21 @@ export function startStepUp(returnTo?: string): void {
 }
 
 export function isStepUpRequired(error: unknown): boolean {
-  return (
-    error instanceof ApiError &&
+  if (!(error instanceof ApiError)) return false;
+
+  if (
     error.status === 403 &&
     (error.message.includes("Step-up") || error.message.includes("acr="))
-  );
+  ) {
+    return true;
+  }
+
+  if (error.status === 409) {
+    const detail = error.payload.detail ?? error.message;
+    return detail.includes("Gold ACR");
+  }
+
+  return false;
 }
 
 export function handleStepUpOnError(error: unknown): boolean {

@@ -3,6 +3,7 @@ import {
   CreditCard,
   LayoutDashboard,
   Shield,
+  Smartphone,
   Wallet,
   type LucideIcon,
 } from "lucide-react";
@@ -79,6 +80,12 @@ export const navSections: NavSection[] = [
         icon: Shield,
         permissions: [Permissions.PasswordChangeOwn, Permissions.MfaManageOwn],
         permissionMode: "any",
+      },
+      {
+        label: "Trusted devices",
+        href: "/account/trusted-devices",
+        icon: Smartphone,
+        permissions: [Permissions.MfaManageOwn],
       },
     ],
   },

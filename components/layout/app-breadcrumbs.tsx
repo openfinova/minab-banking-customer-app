@@ -22,6 +22,7 @@ const LABELS: Record<string, string> = {
   compensation: "Compensation",
   "gl-approvals": "GL approvals",
   security: "Security",
+  "trusted-devices": "Trusted devices",
   audit: "Audit",
   compliance: "AML & compliance",
   configuration: "Configuration",

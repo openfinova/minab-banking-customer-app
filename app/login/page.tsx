@@ -18,19 +18,20 @@ function LoginContent() {
   const search = useSearchParams();
   const { isAuthenticated, isLoading, forcePasswordChange, loginWithRedirect } = useAuth();
   const reason = search.get("reason") ?? undefined;
+  const returnTo = search.get("returnTo") ?? "/dashboard";
   const [pending, setPending] = React.useState(false);
 
   React.useEffect(() => {
     if (isLoading) return;
     if (isAuthenticated) {
-      router.replace(forcePasswordChange ? "/account/force-password-change" : "/dashboard");
+      router.replace(forcePasswordChange ? "/account/force-password-change" : returnTo);
     }
-  }, [isAuthenticated, isLoading, forcePasswordChange, router]);
+  }, [isAuthenticated, isLoading, forcePasswordChange, router, returnTo]);
 
   const onSignIn = async () => {
     setPending(true);
     try {
-      await loginWithRedirect();
+      await loginWithRedirect(returnTo);
     } finally {
       setPending(false);
     }

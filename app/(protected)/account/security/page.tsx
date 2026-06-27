@@ -35,6 +35,17 @@ export default function AccountSecurityPage() {
               <CardContent className="text-sm text-primary">Open MFA settings</CardContent>
             </Card>
           </Link>
+          <Link href="/account/trusted-devices">
+            <Card className="h-full transition-shadow hover:shadow-md">
+              <CardHeader>
+                <CardTitle>Trusted devices</CardTitle>
+                <CardDescription>
+                  Enrol the Minab TAN app on your phone for payment authorization.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-sm text-primary">Manage trusted devices</CardContent>
+            </Card>
+          </Link>
         </div>
       </div>
     </RouteGuard>

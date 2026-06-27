@@ -10,9 +10,11 @@ export const serverAuthConfig = {
   publicAppUrl: optional("APP_PUBLIC_URL", "http://localhost:3001").replace(/\/$/, ""),
   apiBaseUrl: optional("API_BASE_URL", "http://localhost:8080"),
   oidc: {
-    authority: optional("OIDC_AUTHORITY", "http://localhost:8080").replace(/\/$/, ""),
-    tokenAuthority: optional("OIDC_TOKEN_AUTHORITY", optional("OIDC_AUTHORITY", "http://localhost:8080"))
-        .replace(/\/$/, ""),
+    authority: optional("OIDC_AUTHORITY", "http://localhost:8081/realms/openfinova").replace(/\/$/, ""),
+    tokenAuthority: optional(
+      "OIDC_TOKEN_AUTHORITY",
+      optional("OIDC_AUTHORITY", "http://localhost:8081/realms/openfinova"),
+    ).replace(/\/$/, ""),
     clientId: optional("OIDC_CLIENT_ID", "customer-portal"),
     clientSecret: optional("OIDC_CLIENT_SECRET", "customer-portal-secret"),
     redirectUri: optional("OIDC_REDIRECT_URI", "http://localhost:3001/api/auth/callback"),

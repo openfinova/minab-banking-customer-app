@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useIdleTimeout } from "@/lib/auth/idle-timeout";
 import { useAuth } from "@/lib/auth/auth-provider";
+import { appConfig } from "@/lib/config";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,7 +24,7 @@ export function IdleTimeoutWatcher() {
     onWarning: () => setOpen(true),
     onTimeout: () => {
       setOpen(false);
-      void logout();
+      window.location.assign(appConfig.oidc.sessionEndPath);
     },
   });
 
