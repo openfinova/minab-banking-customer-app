@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getBffSession } from "@/lib/auth/server/session";
+import { getBffSessionForResponse } from "@/lib/auth/server/session";
 import { createPkceAuthorizeUrl } from "@/lib/auth/server/oidc-server";
 
 /** Starts a step-up OIDC flow (prompt=login + gold acr). */
@@ -11,7 +11,8 @@ export async function GET(request: Request) {
     prompt: "login",
     acrValues: "urn:mace:incommon:iap:gold",
   });
-  const session = await getBffSession();
+  const response = NextResponse.redirect(pkce.url);
+  const session = await getBffSessionForResponse(request, response);
   session.pkce = {
     codeVerifier: pkce.codeVerifier,
     state: pkce.state,
@@ -19,5 +20,5 @@ export async function GET(request: Request) {
   };
   session.returnTo = returnTo;
   await session.save();
-  return NextResponse.redirect(pkce.url);
+  return response;
 }

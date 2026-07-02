@@ -85,8 +85,12 @@ export async function refreshTokens(refreshToken: string): Promise<TokenResponse
 }
 
 export function tokenResponseToBffFields(token: TokenResponse) {
-  const claims = decodeJwt(token.access_token);
-  const user = claimsToUser(claims);
+  const accessClaims = decodeJwt(token.access_token);
+  const idClaims = token.id_token ? decodeJwt(token.id_token) : null;
+  const acr =
+    (typeof accessClaims.acr === "string" ? accessClaims.acr : undefined) ??
+    (typeof idClaims?.acr === "string" ? idClaims.acr : undefined);
+  const user = claimsToUser({ ...accessClaims, acr });
   return {
     accessToken: token.access_token,
     refreshToken: token.refresh_token,
